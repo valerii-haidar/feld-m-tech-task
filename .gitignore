@@ -1,0 +1,8 @@
+.vscode/
+*.db
+*.csv
+*.code-workspace
+*.json
+*.xml
+*.pyc
+__pycache__/
