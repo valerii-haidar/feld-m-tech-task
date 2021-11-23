@@ -32,6 +32,7 @@ class TransactionManager:
 
     def print_most_day_revenue(self, device_type=None) -> None:
         '''Prints out most day revenue for choosen device type'''
+        device_name = 'any device'
         query = self.session.query(
             Transaction.datetime,
             func.sum(Transaction.revenue).label('total_revenue')
@@ -39,11 +40,12 @@ class TransactionManager:
         if device_type is not None:
             query = query.filter(
                 Transaction.device_type == device_type.value)
+            device_name = device_type.name
         result = query.order_by(desc('total_revenue')).first()
         print(
             f'A day which most revenue for '
-            f'users who ordered via mobile '
-            f'phone was {result.datetime.date()}: '
+            f'users who ordered via {device_name} '
+            f'was {result.datetime.date()}: '
             f'total revenue is {result.total_revenue}')
 
     def convert_currency_to_euro(
