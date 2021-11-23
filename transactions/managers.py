@@ -85,6 +85,8 @@ class TransactionManager:
                 if transaction_columns is None:
                     transaction_columns = transaction.__table__.columns.keys()
                 if device_columns is None:
+                    # Since we have a `device_type` in transactions table,
+                    # i decided to not include `id` from devices table.
                     device_columns = [
                         column for column in device.__table__.columns.keys()
                         if column != 'id'
